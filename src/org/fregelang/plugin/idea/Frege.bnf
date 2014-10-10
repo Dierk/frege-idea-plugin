@@ -1,0 +1,20 @@
+{
+  parserClass="org.fregelang.plugin.idea.parser.FregeParser"
+ 
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+ 
+  psiClassPrefix="Frege"
+  psiImplClassSuffix="Impl"
+  psiPackage="org.fregelang.plugin.idea.psi"
+  psiImplPackage="org.fregelang.plugin.idea.psi.impl"
+ 
+  elementTypeHolderClass="org.fregelang.plugin.idea.psi.FregeTypes"
+  elementTypeClass="org.fregelang.plugin.idea.psi.FregeElementType"
+  tokenTypeClass="org.fregelang.plugin.idea.psi.FregeTokenType"
+}
+ 
+simpleFile ::= item_*
+ 
+private item_ ::= (property|COMMENT|CRLF)
+ 
+property ::= (KEY? SEPARATOR VALUE?) | KEY
