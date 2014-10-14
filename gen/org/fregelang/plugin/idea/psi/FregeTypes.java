@@ -21,7 +21,6 @@ public interface FregeTypes {
   IElementType COMMA = new FregeTokenType("COMMA");
   IElementType DATA_KW = new FregeTokenType("DATA_KW");
   IElementType DEFAULT_KW = new FregeTokenType("DEFAULT_KW");
-  IElementType DERIVING_KW = new FregeTokenType("DERIVING_KW");
   IElementType DOLLAR = new FregeTokenType("DOLLAR");
   IElementType DOT = new FregeTokenType("DOT");
   IElementType DOT_DOT = new FregeTokenType("DOT_DOT");
@@ -51,7 +50,6 @@ public interface FregeTypes {
   IElementType LEFT_PAREN = new FregeTokenType("LEFT_PAREN");
   IElementType LET_KW = new FregeTokenType("LET_KW");
   IElementType MODULE_KW = new FregeTokenType("MODULE_KW");
-  IElementType NEWTYPE_KW = new FregeTokenType("NEWTYPE_KW");
   IElementType NEW_LINE = new FregeTokenType("NEW_LINE");
   IElementType NUMBER = new FregeTokenType("NUMBER");
   IElementType OF_KW = new FregeTokenType("OF_KW");
