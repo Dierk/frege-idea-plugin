@@ -162,7 +162,6 @@ EOL_COMMENT = "--"[^\n]*
 "class"               { return FregeTypes.CLASS_KW; }
 "data"                { return FregeTypes.DATA_KW; }
 "default"             { return FregeTypes.DEFAULT_KW; }
-"deriving"            { return FregeTypes.DERIVING_KW; }
 "do"                  { return FregeTypes.DO_KW; }
 "else"                { return FregeTypes.ELSE_KW; }
 "export"              { return FregeTypes.EXPORT; }
@@ -178,7 +177,6 @@ EOL_COMMENT = "--"[^\n]*
 "foreign"             { return FregeTypes.FOREIGN_KW; }
 "let"                 { return FregeTypes.LET_KW; }
 "module"              { return FregeTypes.MODULE_KW; }
-"newtype"             { return FregeTypes.NEWTYPE_KW; }
 "of"                  { return FregeTypes.OF_KW; }
 "then"                { return FregeTypes.THEN_KW; }
 "qualified"           { return FregeTypes.QUALIFIED_KW; }

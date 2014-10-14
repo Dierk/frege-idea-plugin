@@ -52,8 +52,7 @@ private item_ ::= (
    CLASS_KW |      
    DATA_KW |       
    DEFAULT_KW |    
-   DERIVING_KW |   
-   DO_KW |         
+   DO_KW |
    ELSE_KW |       
    EXPORT |        
    HIDING_KW |     
@@ -68,8 +67,7 @@ private item_ ::= (
    FOREIGN_KW |    
    LET_KW |        
    MODULE_KW |     
-   NEWTYPE_KW |    
-   OF_KW |         
+   OF_KW |
    THEN_KW |       
    QUALIFIED_KW |  
    SAFE |          

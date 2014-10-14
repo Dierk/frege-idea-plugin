@@ -66,8 +66,7 @@ public class FregeParser implements PsiParser {
   //    CLASS_KW |      
   //    DATA_KW |       
   //    DEFAULT_KW |    
-  //    DERIVING_KW |   
-  //    DO_KW |         
+  //    DO_KW |
   //    ELSE_KW |       
   //    EXPORT |        
   //    HIDING_KW |     
@@ -82,8 +81,7 @@ public class FregeParser implements PsiParser {
   //    FOREIGN_KW |    
   //    LET_KW |        
   //    MODULE_KW |     
-  //    NEWTYPE_KW |    
-  //    OF_KW |         
+  //    OF_KW |
   //    THEN_KW |       
   //    QUALIFIED_KW |  
   //    SAFE |          
@@ -138,7 +136,6 @@ public class FregeParser implements PsiParser {
     if (!result_) result_ = consumeToken(builder_, CLASS_KW);
     if (!result_) result_ = consumeToken(builder_, DATA_KW);
     if (!result_) result_ = consumeToken(builder_, DEFAULT_KW);
-    if (!result_) result_ = consumeToken(builder_, DERIVING_KW);
     if (!result_) result_ = consumeToken(builder_, DO_KW);
     if (!result_) result_ = consumeToken(builder_, ELSE_KW);
     if (!result_) result_ = consumeToken(builder_, EXPORT);
@@ -154,7 +151,6 @@ public class FregeParser implements PsiParser {
     if (!result_) result_ = consumeToken(builder_, FOREIGN_KW);
     if (!result_) result_ = consumeToken(builder_, LET_KW);
     if (!result_) result_ = consumeToken(builder_, MODULE_KW);
-    if (!result_) result_ = consumeToken(builder_, NEWTYPE_KW);
     if (!result_) result_ = consumeToken(builder_, OF_KW);
     if (!result_) result_ = consumeToken(builder_, THEN_KW);
     if (!result_) result_ = consumeToken(builder_, QUALIFIED_KW);
