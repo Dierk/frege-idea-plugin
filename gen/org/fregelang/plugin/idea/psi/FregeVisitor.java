@@ -7,10 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public class FregeVisitor extends PsiElementVisitor {
 
-  public void visitProperty(@NotNull FregeProperty o) {
-    visitPsiElement(o);
-  }
-
   public void visitPsiElement(@NotNull PsiElement o) {
     visitElement(o);
   }

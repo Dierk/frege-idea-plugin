@@ -13,27 +13,29 @@ import java.util.Map;
 
 public class FregeColorSettingsPage  implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-            new AttributesDescriptor("Key", FregeSyntaxHighlighter.KEY),
-            new AttributesDescriptor("Separator", FregeSyntaxHighlighter.SEPARATOR),
-            new AttributesDescriptor("Value", FregeSyntaxHighlighter.VALUE),
+        new AttributesDescriptor("Line Comment", FregeSyntaxHighlighter.END_OF_LINE_COMMENT),
+        new AttributesDescriptor("Block Comment", FregeSyntaxHighlighter.BLOCK_COMMENT)
     };
- 
+
     @Nullable
     @Override
     public Icon getIcon() {
         return FregeIcons.FILE;
     }
- 
+
     @NotNull
     @Override
     public SyntaxHighlighter getHighlighter() {
         return new FregeSyntaxHighlighter();
     }
- 
+
     @NotNull
     @Override
     public String getDemoText() {
         return "-- line comment\n" +
+               "{-\n" +
+               "   multi-line comment\n" +
+               "-}\n" +
                "{--\n" +
                "   multi-line doc comment\n" +
                "--}\n" +

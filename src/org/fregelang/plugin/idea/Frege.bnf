@@ -15,6 +15,73 @@
  
 simpleFile ::= item_*
  
-private item_ ::= (property|COMMENT|CRLF)
- 
-property ::= (KEY? SEPARATOR VALUE?) | KEY
+private item_ ::= (
+   BLOCK_COMMENT|
+   END_OF_LINE_COMMENT|
+   NEW_LINE |
+   LEFT_BRACE |    
+   RIGHT_BRACE |   
+   LEFT_BRACKET |  
+   RIGHT_BRACKET | 
+   LEFT_PAREN |    
+   RIGHT_PAREN |   
+   COLON |         
+   DOUBLE_COLON |  
+   SEMICOLON |     
+   DOT |           
+   DOT_DOT |       
+   DOLLAR |        
+   COMMA |         
+   EQUALS |        
+   VERTICAL_BAR |  
+   BACK_SLASH |    
+   LEFT_ARROW |    
+   RIGHT_ARROW |   
+   QUESTION |      
+   HASH |          
+   AT |            
+   TILDE |         
+   BACKQUOTE |     
+   DOUBLE_ARROW |  
+   EXCLAMATION |   
+   UNDERSCORE |    
+   OPERATOR_CONS | 
+   OPERATOR_ID |   
+   AS_KW |         
+   CASE_KW |       
+   CLASS_KW |      
+   DATA_KW |       
+   DEFAULT_KW |    
+   DERIVING_KW |   
+   DO_KW |         
+   ELSE_KW |       
+   EXPORT |        
+   HIDING_KW |     
+   IF_KW |         
+   IMPORT_KW |     
+   IN_KW |         
+   INFIX_KW |      
+   INFIXL_KW |     
+   INFIXR_KW |     
+   INSTANCE_KW |   
+   FORALL_KW |     
+   FOREIGN_KW |    
+   LET_KW |        
+   MODULE_KW |     
+   NEWTYPE_KW |    
+   OF_KW |         
+   THEN_KW |       
+   QUALIFIED_KW |  
+   SAFE |          
+   TYPE_KW |       
+   UNSAFE |        
+   WHERE_KW |      
+   PRAGMA |        
+   NUMBER |        
+   CHARACTER |     
+   STRING |        
+   TH_TY_QUOTE |   
+   TH_VAR_QUOTE |  
+   TYPE_OR_CONS |  
+   ID
+  )

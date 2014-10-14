@@ -20,12 +20,7 @@ public class FregeParser implements PsiParser {
     boolean result_;
     builder_ = adapt_builder_(root_, builder_, this, null);
     Marker marker_ = enter_section_(builder_, 0, _COLLAPSE_, null);
-    if (root_ == PROPERTY) {
-      result_ = property(builder_, 0);
-    }
-    else {
-      result_ = parse_root_(root_, builder_, 0);
-    }
+    result_ = parse_root_(root_, builder_, 0);
     exit_section_(builder_, 0, marker_, root_, result_, true, TRUE_CONDITION);
     return builder_.getTreeBuilt();
   }
@@ -35,55 +30,148 @@ public class FregeParser implements PsiParser {
   }
 
   /* ********************************************************** */
-  // property|COMMENT|CRLF
+  // BLOCK_COMMENT|
+  //    END_OF_LINE_COMMENT|
+  //    NEW_LINE |
+  //    LEFT_BRACE |    
+  //    RIGHT_BRACE |   
+  //    LEFT_BRACKET |  
+  //    RIGHT_BRACKET | 
+  //    LEFT_PAREN |    
+  //    RIGHT_PAREN |   
+  //    COLON |         
+  //    DOUBLE_COLON |  
+  //    SEMICOLON |     
+  //    DOT |           
+  //    DOT_DOT |       
+  //    DOLLAR |        
+  //    COMMA |         
+  //    EQUALS |        
+  //    VERTICAL_BAR |  
+  //    BACK_SLASH |    
+  //    LEFT_ARROW |    
+  //    RIGHT_ARROW |   
+  //    QUESTION |      
+  //    HASH |          
+  //    AT |            
+  //    TILDE |         
+  //    BACKQUOTE |     
+  //    DOUBLE_ARROW |  
+  //    EXCLAMATION |   
+  //    UNDERSCORE |    
+  //    OPERATOR_CONS | 
+  //    OPERATOR_ID |   
+  //    AS_KW |         
+  //    CASE_KW |       
+  //    CLASS_KW |      
+  //    DATA_KW |       
+  //    DEFAULT_KW |    
+  //    DERIVING_KW |   
+  //    DO_KW |         
+  //    ELSE_KW |       
+  //    EXPORT |        
+  //    HIDING_KW |     
+  //    IF_KW |         
+  //    IMPORT_KW |     
+  //    IN_KW |         
+  //    INFIX_KW |      
+  //    INFIXL_KW |     
+  //    INFIXR_KW |     
+  //    INSTANCE_KW |   
+  //    FORALL_KW |     
+  //    FOREIGN_KW |    
+  //    LET_KW |        
+  //    MODULE_KW |     
+  //    NEWTYPE_KW |    
+  //    OF_KW |         
+  //    THEN_KW |       
+  //    QUALIFIED_KW |  
+  //    SAFE |          
+  //    TYPE_KW |       
+  //    UNSAFE |        
+  //    WHERE_KW |      
+  //    PRAGMA |        
+  //    NUMBER |        
+  //    CHARACTER |     
+  //    STRING |        
+  //    TH_TY_QUOTE |   
+  //    TH_VAR_QUOTE |  
+  //    TYPE_OR_CONS |  
+  //    ID
   static boolean item_(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "item_")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = property(builder_, level_ + 1);
-    if (!result_) result_ = consumeToken(builder_, COMMENT);
-    if (!result_) result_ = consumeToken(builder_, CRLF);
+    result_ = consumeToken(builder_, BLOCK_COMMENT);
+    if (!result_) result_ = consumeToken(builder_, END_OF_LINE_COMMENT);
+    if (!result_) result_ = consumeToken(builder_, NEW_LINE);
+    if (!result_) result_ = consumeToken(builder_, LEFT_BRACE);
+    if (!result_) result_ = consumeToken(builder_, RIGHT_BRACE);
+    if (!result_) result_ = consumeToken(builder_, LEFT_BRACKET);
+    if (!result_) result_ = consumeToken(builder_, RIGHT_BRACKET);
+    if (!result_) result_ = consumeToken(builder_, LEFT_PAREN);
+    if (!result_) result_ = consumeToken(builder_, RIGHT_PAREN);
+    if (!result_) result_ = consumeToken(builder_, COLON);
+    if (!result_) result_ = consumeToken(builder_, DOUBLE_COLON);
+    if (!result_) result_ = consumeToken(builder_, SEMICOLON);
+    if (!result_) result_ = consumeToken(builder_, DOT);
+    if (!result_) result_ = consumeToken(builder_, DOT_DOT);
+    if (!result_) result_ = consumeToken(builder_, DOLLAR);
+    if (!result_) result_ = consumeToken(builder_, COMMA);
+    if (!result_) result_ = consumeToken(builder_, EQUALS);
+    if (!result_) result_ = consumeToken(builder_, VERTICAL_BAR);
+    if (!result_) result_ = consumeToken(builder_, BACK_SLASH);
+    if (!result_) result_ = consumeToken(builder_, LEFT_ARROW);
+    if (!result_) result_ = consumeToken(builder_, RIGHT_ARROW);
+    if (!result_) result_ = consumeToken(builder_, QUESTION);
+    if (!result_) result_ = consumeToken(builder_, HASH);
+    if (!result_) result_ = consumeToken(builder_, AT);
+    if (!result_) result_ = consumeToken(builder_, TILDE);
+    if (!result_) result_ = consumeToken(builder_, BACKQUOTE);
+    if (!result_) result_ = consumeToken(builder_, DOUBLE_ARROW);
+    if (!result_) result_ = consumeToken(builder_, EXCLAMATION);
+    if (!result_) result_ = consumeToken(builder_, UNDERSCORE);
+    if (!result_) result_ = consumeToken(builder_, OPERATOR_CONS);
+    if (!result_) result_ = consumeToken(builder_, OPERATOR_ID);
+    if (!result_) result_ = consumeToken(builder_, AS_KW);
+    if (!result_) result_ = consumeToken(builder_, CASE_KW);
+    if (!result_) result_ = consumeToken(builder_, CLASS_KW);
+    if (!result_) result_ = consumeToken(builder_, DATA_KW);
+    if (!result_) result_ = consumeToken(builder_, DEFAULT_KW);
+    if (!result_) result_ = consumeToken(builder_, DERIVING_KW);
+    if (!result_) result_ = consumeToken(builder_, DO_KW);
+    if (!result_) result_ = consumeToken(builder_, ELSE_KW);
+    if (!result_) result_ = consumeToken(builder_, EXPORT);
+    if (!result_) result_ = consumeToken(builder_, HIDING_KW);
+    if (!result_) result_ = consumeToken(builder_, IF_KW);
+    if (!result_) result_ = consumeToken(builder_, IMPORT_KW);
+    if (!result_) result_ = consumeToken(builder_, IN_KW);
+    if (!result_) result_ = consumeToken(builder_, INFIX_KW);
+    if (!result_) result_ = consumeToken(builder_, INFIXL_KW);
+    if (!result_) result_ = consumeToken(builder_, INFIXR_KW);
+    if (!result_) result_ = consumeToken(builder_, INSTANCE_KW);
+    if (!result_) result_ = consumeToken(builder_, FORALL_KW);
+    if (!result_) result_ = consumeToken(builder_, FOREIGN_KW);
+    if (!result_) result_ = consumeToken(builder_, LET_KW);
+    if (!result_) result_ = consumeToken(builder_, MODULE_KW);
+    if (!result_) result_ = consumeToken(builder_, NEWTYPE_KW);
+    if (!result_) result_ = consumeToken(builder_, OF_KW);
+    if (!result_) result_ = consumeToken(builder_, THEN_KW);
+    if (!result_) result_ = consumeToken(builder_, QUALIFIED_KW);
+    if (!result_) result_ = consumeToken(builder_, SAFE);
+    if (!result_) result_ = consumeToken(builder_, TYPE_KW);
+    if (!result_) result_ = consumeToken(builder_, UNSAFE);
+    if (!result_) result_ = consumeToken(builder_, WHERE_KW);
+    if (!result_) result_ = consumeToken(builder_, PRAGMA);
+    if (!result_) result_ = consumeToken(builder_, NUMBER);
+    if (!result_) result_ = consumeToken(builder_, CHARACTER);
+    if (!result_) result_ = consumeToken(builder_, STRING);
+    if (!result_) result_ = consumeToken(builder_, TH_TY_QUOTE);
+    if (!result_) result_ = consumeToken(builder_, TH_VAR_QUOTE);
+    if (!result_) result_ = consumeToken(builder_, TYPE_OR_CONS);
+    if (!result_) result_ = consumeToken(builder_, ID);
     exit_section_(builder_, marker_, null, result_);
     return result_;
-  }
-
-  /* ********************************************************** */
-  // (KEY? SEPARATOR VALUE?) | KEY
-  public static boolean property(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "property")) return false;
-    if (!nextTokenIs(builder_, "<property>", KEY, SEPARATOR)) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, "<property>");
-    result_ = property_0(builder_, level_ + 1);
-    if (!result_) result_ = consumeToken(builder_, KEY);
-    exit_section_(builder_, level_, marker_, PROPERTY, result_, false, null);
-    return result_;
-  }
-
-  // KEY? SEPARATOR VALUE?
-  private static boolean property_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "property_0")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = property_0_0(builder_, level_ + 1);
-    result_ = result_ && consumeToken(builder_, SEPARATOR);
-    result_ = result_ && property_0_2(builder_, level_ + 1);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  // KEY?
-  private static boolean property_0_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "property_0_0")) return false;
-    consumeToken(builder_, KEY);
-    return true;
-  }
-
-  // VALUE?
-  private static boolean property_0_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "property_0_2")) return false;
-    consumeToken(builder_, VALUE);
-    return true;
   }
 
   /* ********************************************************** */

@@ -18,7 +18,7 @@ public class FregePropertyImpl extends ASTWrapperPsiElement implements FregeProp
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof FregeVisitor) ((FregeVisitor)visitor).visitProperty(this);
+    if (visitor instanceof FregeVisitor) ((FregeVisitor)visitor).visitPsiElement(this);
     else super.accept(visitor);
   }
 
