@@ -21,11 +21,12 @@ public class FregeSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey END_OF_LINE_COMMENT = createTextAttributesKey("SIMPLE_COMMENT", SyntaxHighlighterColors.LINE_COMMENT);
     public static final TextAttributesKey BLOCK_COMMENT       = createTextAttributesKey("SIMPLE_BLOCK_COMMENT", SyntaxHighlighterColors.JAVA_BLOCK_COMMENT);
     public static final TextAttributesKey KEYWORD             = createTextAttributesKey("SIMPLE_KEYWORD", SyntaxHighlighterColors.KEYWORD);
+    public static final TextAttributesKey STRING              = createTextAttributesKey("SIMPLE_STRING", SyntaxHighlighterColors.STRING);
+    public static final TextAttributesKey NUMBER              = createTextAttributesKey("SIMPLE_NUMBER", SyntaxHighlighterColors.NUMBER);
 
     public static final IElementType[] KEYWORDS =  {
         AS_KW, CASE_KW, CLASS_KW, DATA_KW, DEFAULT_KW, DO_KW, ELSE_KW, EXPORT, HIDING_KW, IF_KW, IMPORT_KW, IN_KW, INFIX_KW, INFIXL_KW,
-        INFIXR_KW, INSTANCE_KW, FORALL_KW, FOREIGN_KW, LET_KW, MODULE_KW, OF_KW, THEN_KW, QUALIFIED_KW, TYPE_KW, WHERE_KW, PRAGMA,
-        NUMBER, CHARACTER, STRING };
+        INFIXR_KW, INSTANCE_KW, FORALL_KW, FOREIGN_KW, LET_KW, MODULE_KW, OF_KW, THEN_KW, QUALIFIED_KW, TYPE_KW, WHERE_KW };
 
     static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("SIMPLE_BAD_CHARACTER",
         new TextAttributes(Color.RED, null, null, null, Font.BOLD));
@@ -34,6 +35,8 @@ public class FregeSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] COMMENT_KEYS       = new TextAttributesKey[]{END_OF_LINE_COMMENT};
     private static final TextAttributesKey[] BLOCK_COMMENT_KEYS = new TextAttributesKey[]{BLOCK_COMMENT};
     private static final TextAttributesKey[] KEYWORD_KEYS       = new TextAttributesKey[]{KEYWORD};
+    private static final TextAttributesKey[] STRING_KEYS        = new TextAttributesKey[]{STRING};
+    private static final TextAttributesKey[] NUMBER_KEYS        = new TextAttributesKey[]{NUMBER};
     private static final TextAttributesKey[] EMPTY_KEYS         = new TextAttributesKey[0];
 
     protected boolean isKeyword(IElementType candidate) {
@@ -58,6 +61,12 @@ public class FregeSyntaxHighlighter extends SyntaxHighlighterBase {
             return BLOCK_COMMENT_KEYS;
         } else if (tokenType.equals(FregeTypes.END_OF_LINE_COMMENT)) {
             return COMMENT_KEYS;
+        } else if (tokenType.equals(FregeTypes.STRING)) {
+            return STRING_KEYS;
+        } else if (tokenType.equals(FregeTypes.CHARACTER)) {
+            return STRING_KEYS;
+        } else if (tokenType.equals(FregeTypes.NUMBER)) {
+            return NUMBER_KEYS;
         } else if (tokenType.equals(TokenType.BAD_CHARACTER)) {
             return BAD_CHAR_KEYS;
         } else if (isKeyword(tokenType)) {

@@ -15,6 +15,8 @@ public class FregeColorSettingsPage  implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
         new AttributesDescriptor("Line Comment",    FregeSyntaxHighlighter.END_OF_LINE_COMMENT),
         new AttributesDescriptor("Block Comment",   FregeSyntaxHighlighter.BLOCK_COMMENT),
+        new AttributesDescriptor("String",          FregeSyntaxHighlighter.STRING),
+        new AttributesDescriptor("Number",          FregeSyntaxHighlighter.NUMBER),
         new AttributesDescriptor("Keyword",         FregeSyntaxHighlighter.KEYWORD)
     };
 
