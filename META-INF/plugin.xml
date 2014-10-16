@@ -33,6 +33,8 @@
 
     <colorSettingsPage implementation="org.fregelang.plugin.idea.FregeColorSettingsPage"/>
 
+    <lang.commenter language="Frege" implementationClass="org.fregelang.plugin.idea.FregeCommenter"/>
+
   </extensions>
 
   <application-components>
