@@ -2,6 +2,7 @@ package org.fregelang.plugin.idea;
 
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
@@ -18,17 +19,17 @@ import java.io.Reader;
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public class FregeSyntaxHighlighter extends SyntaxHighlighterBase {
-    public static final TextAttributesKey END_OF_LINE_COMMENT = createTextAttributesKey("SIMPLE_COMMENT", SyntaxHighlighterColors.LINE_COMMENT);
-    public static final TextAttributesKey BLOCK_COMMENT       = createTextAttributesKey("SIMPLE_BLOCK_COMMENT", SyntaxHighlighterColors.JAVA_BLOCK_COMMENT);
-    public static final TextAttributesKey KEYWORD             = createTextAttributesKey("SIMPLE_KEYWORD", SyntaxHighlighterColors.KEYWORD);
-    public static final TextAttributesKey STRING              = createTextAttributesKey("SIMPLE_STRING", SyntaxHighlighterColors.STRING);
-    public static final TextAttributesKey NUMBER              = createTextAttributesKey("SIMPLE_NUMBER", SyntaxHighlighterColors.NUMBER);
+    public static final TextAttributesKey END_OF_LINE_COMMENT = createTextAttributesKey("FREGE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+    public static final TextAttributesKey BLOCK_COMMENT       = createTextAttributesKey("FREGE_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
+    public static final TextAttributesKey KEYWORD             = createTextAttributesKey("FREGE_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
+    public static final TextAttributesKey STRING              = createTextAttributesKey("FREGE_STRING", DefaultLanguageHighlighterColors.STRING);
+    public static final TextAttributesKey NUMBER              = createTextAttributesKey("FREGE_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 
-    public static final IElementType[] KEYWORDS =  {
+    public static final IElementType[] KEYWORDS = {
         AS_KW, CASE_KW, CLASS_KW, DATA_KW, DEFAULT_KW, DO_KW, ELSE_KW, EXPORT, HIDING_KW, IF_KW, IMPORT_KW, IN_KW, INFIX_KW, INFIXL_KW,
-        INFIXR_KW, INSTANCE_KW, FORALL_KW, FOREIGN_KW, LET_KW, MODULE_KW, OF_KW, THEN_KW, QUALIFIED_KW, TYPE_KW, WHERE_KW };
+        INFIXR_KW, INSTANCE_KW, FORALL_KW, FOREIGN_KW, LET_KW, MODULE_KW, OF_KW, THEN_KW, QUALIFIED_KW, TYPE_KW, WHERE_KW};
 
-    static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("SIMPLE_BAD_CHARACTER",
+    static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("FREGE_BAD_CHARACTER",
         new TextAttributes(Color.RED, null, null, null, Font.BOLD));
 
     private static final TextAttributesKey[] BAD_CHAR_KEYS      = new TextAttributesKey[]{BAD_CHARACTER};
