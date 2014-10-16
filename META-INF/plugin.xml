@@ -25,15 +25,54 @@
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
 
-    <fileTypeFactory implementation="org.fregelang.plugin.idea.FregeFileTypeFactory"/>
+    <fileTypeFactory 
+      implementation="org.fregelang.plugin.idea.FregeFileTypeFactory"/>
+    <lang.parserDefinition 
+      language="Frege" 
+      implementationClass="org.fregelang.plugin.idea.FregeParserDefinition"/>
+    <lang.syntaxHighlighterFactory 
+      key="Frege"
+      implementationClass="org.fregelang.plugin.idea.FregeSyntaxHighlighterFactory"/>
+    <colorSettingsPage 
+      implementation="org.fregelang.plugin.idea.FregeColorSettingsPage"/>
+    <lang.commenter 
+      language="Frege" 
+      implementationClass="org.fregelang.plugin.idea.FregeCommenter"/>
+    <configurationType
+      implementation="org.fregelang.plugin.idea.FregeRunConfigurationType"/>
 
-    <lang.parserDefinition language="Frege" implementationClass="org.fregelang.plugin.idea.FregeParserDefinition"/>
+    <!-- future use  -->
 
-    <lang.syntaxHighlighterFactory key="Frege" implementationClass="org.fregelang.plugin.idea.FregeSyntaxHighlighterFactory"/>
+<!--    <moduleType
+      id="FREGE_MODULE" 
+      classpathProvider="false"
+      implementationClass="org.fregelang.plugin.idea.FregeModuleType"/>
+    <completion.contributor 
+      language="Frege"
+      implementationClass="org.fregelang.plugin.idea.FregeCompletionContributor"/>
+    <annotator
+      language="Frege"
+      implementationClass="org.fregelang.plugin.idea.FregeAnnotator"/>
+    <applicationService 
+      serviceImplementation="org.fregelang.plugin.idea.config.FregeSettings"/>
+    <lang.braceMatcher 
+      language="Frege"
+      implementationClass="org.fregelang.plugin.idea.FregeBraceMatcher"/>
+    <externalAnnotator
+      language="Frege"
+      implementationClass="org.fregelang.plugin.idea.FregeExternalAnnotator"/>
+    <configurationType 
+      implementation="org.fregelang.plugin.idea.FregeRunConfigurationType"/>
+    <moduleConfigurationEditorProvider 
+      implementation="org.fregelang.plugin.idea.FregeModuleConfigEditor"/>
+    <sdkType 
+      id="Frege" 
+      implementation="org.fregelang.plugin.idea.FregeSdkType"/>
+    <lang.documentationProvider 
+      language="Frege"
+      implementationClass="org.fregelang.plugin.idea.doc.FregeQuickDocumentationProvider"
+      order="first"/>-->
 
-    <colorSettingsPage implementation="org.fregelang.plugin.idea.FregeColorSettingsPage"/>
-
-    <lang.commenter language="Frege" implementationClass="org.fregelang.plugin.idea.FregeCommenter"/>
 
   </extensions>
 
