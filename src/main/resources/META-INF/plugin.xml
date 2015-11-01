@@ -1,8 +1,8 @@
 <idea-plugin version="2">
   <id>org.fregelang.plugin.idea</id>
   <name>Frege Plugin</name>
-  <version>0.1</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">The Frege Team</vendor>
+  <version>0.1.0</version>
+  <vendor email="rahul.som@gmail.com" url="https://github.com/Frege/frege">The Frege Team</vendor>
 
   <description><![CDATA[
       Language support for the Frege programming language
