@@ -1,0 +1,19 @@
+plugins {
+    id "org.jetbrains.intellij" version "0.0.27"
+}
+
+apply plugin: 'org.jetbrains.intellij'
+
+intellij {
+    version 'IC-14.1.4'
+    pluginName 'Frege'
+
+    publish {
+        username System.getenv('JETBRAINS_USER')
+        password System.getenv('JETBRAINS_PASS')
+        // pluginId '5047'
+        channel 'nightly'
+    }
+}
+
+sourceSets.main.java.srcDirs = ['src/main/java', 'gen']
