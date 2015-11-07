@@ -18,7 +18,6 @@ dependencies {
     jflex files("$buildDir/tools/JFlex.jar")
 }
 
-
 import de.undercouch.gradle.tasks.download.Download
 
 task downloadGrammarKit(type: Download) {
@@ -47,12 +46,12 @@ task generateBnfSources(type: JavaExec) {
 task downloadJFlexJar(type: Download) {
     src "https://github.com/JetBrains/intellij-community/raw/master/tools/lexer/jflex-1.4/lib/JFlex.jar"
     dest "$buildDir/tools/JFlex.jar"
-    onlyIfNewer true
+    onlyIf { !file("$buildDir/tools/JFlex.jar").exists() }
 }
 task downloadJFlexSkeleton(type: Download) {
     src "https://raw.github.com/JetBrains/intellij-community/master/tools/lexer/idea-flex.skeleton"
     dest "$buildDir/tools/idea-flex.skeleton"
-    onlyIfNewer true
+    onlyIf { !file("$buildDir/tools/idea-flex.skeleton").exists() }
 }
 
 task generateFlexSources(type: JavaExec) {
