@@ -39,7 +39,7 @@
       language="Frege" 
       implementationClass="org.fregelang.plugin.idea.FregeCommenter"/>
     <configurationType
-      implementation="org.fregelang.plugin.idea.FregeRunConfigurationType"/>
+            implementation="org.fregelang.plugin.idea.run.FregeRunConfigurationType"/>
 
     <!-- future use  -->
 
@@ -65,10 +65,10 @@
       implementation="org.fregelang.plugin.idea.FregeRunConfigurationType"/>
     <moduleConfigurationEditorProvider 
       implementation="org.fregelang.plugin.idea.FregeModuleConfigEditor"/>
-    <sdkType 
-      id="Frege" 
+    <sdkType
+      id="Frege"
       implementation="org.fregelang.plugin.idea.FregeSdkType"/>
-    <lang.documentationProvider 
+    <lang.documentationProvider
       language="Frege"
       implementationClass="org.fregelang.plugin.idea.doc.FregeQuickDocumentationProvider"
       order="first"/>-->

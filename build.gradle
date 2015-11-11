@@ -3,9 +3,17 @@ plugins {
     id "de.undercouch.download" version "2.0.0"
 }
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'de.undercouch.download'
 apply from: 'gradle/codegen.gradle'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 intellij {
     version 'IC-14.1.4'
@@ -19,6 +27,4 @@ intellij {
     }
 }
 
-sourceSets.main.java.srcDirs = [
-        'src/main/java', 'gen', "$buildDir/generatedSources"
-]
+sourceSets.main.java.srcDirs = ['src/main/java', 'gen', "$buildDir/generatedSources"]

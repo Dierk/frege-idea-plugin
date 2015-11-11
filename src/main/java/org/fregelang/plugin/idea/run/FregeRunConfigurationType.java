@@ -1,4 +1,4 @@
-package org.fregelang.plugin.idea;
+package org.fregelang.plugin.idea.run;
 
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
@@ -7,6 +7,8 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import org.fregelang.plugin.idea.FregeFileType;
+import org.fregelang.plugin.idea.FregeIcons;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,6 +19,10 @@ public class FregeRunConfigurationType implements ConfigurationType {
 
   public FregeRunConfigurationType() {
     myConfigurationFactory = new FregeFactory(this);
+  }
+
+  public static FregeRunConfigurationType getInstance() {
+    return ConfigurationTypeUtil.findConfigurationType(FregeRunConfigurationType.class);
   }
 
   @Override
@@ -46,10 +52,6 @@ public class FregeRunConfigurationType implements ConfigurationType {
     return new ConfigurationFactory[]{myConfigurationFactory};
   }
 
-  public static FregeRunConfigurationType getInstance() {
-    return ConfigurationTypeUtil.findConfigurationType(FregeRunConfigurationType.class);
-  }
-
   private static class FregeFactory extends ConfigurationFactory {
     public FregeFactory(ConfigurationType type) {
       super(type);
@@ -62,7 +64,7 @@ public class FregeRunConfigurationType implements ConfigurationType {
 
     @Override
     public RunConfiguration createTemplateConfiguration(Project project) {
-      return new FregeRunConfiguration("Frege Run", project, this);
+      return new FregeRunConfiguration(project, this, "Frege Run");
     }
 
   }
