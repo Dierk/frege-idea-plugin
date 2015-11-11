@@ -1,0 +1,75 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'de.undercouch:gradle-download-task:2.0.0'
+    }
+}
+configurations {
+    bnf
+    jflex
+}
+
+dependencies {
+    bnf files("$buildDir/grammarKit/GrammarKit/lib/grammar-kit.jar")
+    jflex files("$buildDir/tools/JFlex.jar")
+}
+
+import de.undercouch.gradle.tasks.download.Download
+
+task downloadGrammarKit(type: Download) {
+    src 'https://github.com/JetBrains/Grammar-Kit/releases/download/1.2.1/GrammarKit.zip'
+    dest "$buildDir/tools/GrammarKit.zip"
+    onlyIfNewer true
+}
+
+task unzipGrammarKit(type: Copy) {
+
+    dependsOn downloadGrammarKit
+    def zipFile = file("$buildDir/tools/GrammarKit.zip")
+    def outputDir = file("${buildDir}/grammarKit")
+
+    from zipTree(zipFile)
+    into outputDir
+}
+
+task generateBnfSources(type: JavaExec) {
+    dependsOn unzipGrammarKit
+    main = 'org.intellij.grammar.Main'
+    args "$buildDir/generatedSources", "src/main/java/org/fregelang/plugin/idea/Frege.bnf"
+    classpath = configurations.bnf + configurations.compile
+}
+
+task downloadJFlexJar(type: Download) {
+    src "https://github.com/JetBrains/intellij-community/raw/master/tools/lexer/jflex-1.4/lib/JFlex.jar"
+    dest "$buildDir/tools/JFlex.jar"
+    onlyIf { !file("$buildDir/tools/JFlex.jar").exists() }
+}
+task downloadJFlexSkeleton(type: Download) {
+    src "https://raw.github.com/JetBrains/intellij-community/master/tools/lexer/idea-flex.skeleton"
+    dest "$buildDir/tools/idea-flex.skeleton"
+    onlyIf { !file("$buildDir/tools/idea-flex.skeleton").exists() }
+}
+
+task generateFlexSources(type: JavaExec) {
+    dependsOn downloadJFlexJar, downloadJFlexSkeleton
+    main = 'JFlex.Main'
+    args([
+            '-sliceandcharat',
+            '-skel',
+            "$buildDir/tools/idea-flex.skeleton",
+            '-d',
+            "$buildDir/generatedSources/org/fregelang/plugin/idea",
+            "src/main/java/org/fregelang/plugin/idea/Frege.flex",
+    ])
+    classpath = configurations.jflex
+}
+
+task generateSources() {
+    dependsOn generateBnfSources, generateFlexSources
+}
+
+compileJava.dependsOn generateSources
