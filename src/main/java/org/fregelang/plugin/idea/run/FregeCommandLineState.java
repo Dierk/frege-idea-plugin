@@ -14,6 +14,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.indexing.FileBasedIndex;
+import frege.prelude.PreludeBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -49,24 +49,29 @@ public class FregeCommandLineState extends CommandLineState {
     final VirtualFile[] sourceRoots = projectRootManager.getContentSourceRoots();
     final String sourcePath = getSourcePath(sourceRoots);
     final String fregeClassPath = getClassPathSource();
+    if (fregeClassPath == null) {
+      return echo("Could not find frege in classpath");
+    }
     final String projectOutPath = project.getBasePath() + "/out";
     final String effectiveClassPath = fregeClassPath + ":" + projectOutPath;
 
     /*
      * Cross compile from frege to java
      */
-    ProcessHandler fregec = compile(sourcePath, ".fr", file -> new String[]{
-        "java", "-Xss1m", "-jar", fregeClassPath,
-        "-d", projectOutPath, "-sp", sourcePath, "-nocp", "-greek", "-j", file
+    ProcessHandler fregec = compile(sourcePath, ".fr", "Could not compile with fregec", file -> {
+      PreludeBase.TList args = PreludeBase._toList(new String[]{
+              "-d", projectOutPath, "-sp", sourcePath, "-nocp", "-greek", "-j", file
+      });
+      return frege.compiler.Main._main(args).apply(args).result().forced();
     });
     if (fregec != null) return fregec;
 
     /*
      * Compile Java to bytecode
      */
-    ProcessHandler javac = compile(projectOutPath, ".java", file -> new String[]{
-        "javac", "-cp", effectiveClassPath, "-d", projectOutPath, file
-    });
+    ProcessHandler javac = compile(projectOutPath, ".java", "Could not compile with javac", file ->
+            com.sun.tools.javac.Main.compile(new String[]{"-cp", effectiveClassPath, "-d", projectOutPath, file}) == 0
+    );
     if (javac != null) return javac;
 
     /*
@@ -82,9 +87,15 @@ public class FregeCommandLineState extends CommandLineState {
   }
 
   @Nullable
-  private ProcessHandler compile(String projectOutPath, String suffix, CommandFunction commandFunction) throws ExecutionException {
+  private ProcessHandler compile(
+          String projectOutPath, String suffix, String failureMessage, CommandFunction commandFunction)
+          throws ExecutionException {
     final ArrayList<String> fileNames = new ArrayList<>();
-    final File[] fileList = new File(projectOutPath).listFiles();
+    File outFile = new File(projectOutPath);
+    if (!outFile.exists()) {
+      outFile.mkdirs();
+    }
+    final File[] fileList = outFile.listFiles();
     if (fileList == null || fileList.length == 0) {
       return echo("Filelist could not be compiled");
     }
@@ -93,9 +104,9 @@ public class FregeCommandLineState extends CommandLineState {
         fileNames.add(file.getAbsolutePath());
     }
     for (String file : fileNames) {
-      final String[] command = commandFunction.apply(file);
-      if (execProcess(command) != 0) {
-        return echo("Could not compile with " + Arrays.toString(command));
+      final Boolean status = commandFunction.apply(file);
+      if (!status) {
+        return echo(failureMessage);
       }
     }
     return null;
@@ -156,11 +167,7 @@ public class FregeCommandLineState extends CommandLineState {
         FileTypeIndex.NAME, JavaClassFileType.INSTANCE, GlobalSearchScope.allScope(project));
     final ProjectFileIndex fileIndex = ProjectRootManager.getInstance(project).getFileIndex();
 
-    String defaultJarPath = "/usr/local/Cellar/frege/3.22.524-gcc99d7e/libexec/frege3.22.524-gcc99d7e.jar";
-
-    String jarPathFromDependency = getFregeJarPath(containingFiles, fileIndex);
-    return jarPathFromDependency == null ? defaultJarPath : jarPathFromDependency;
-
+    return getFregeJarPath(containingFiles, fileIndex);
   }
 
   /**
@@ -208,6 +215,6 @@ public class FregeCommandLineState extends CommandLineState {
 
   interface CommandFunction {
     @NotNull
-    String[] apply(@NotNull String file);
+    Boolean apply(@NotNull String file);
   }
 }

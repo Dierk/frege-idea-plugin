@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>org.fregelang.plugin.idea</id>
   <name>Frege Plugin</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <vendor email="rahul.som@gmail.com" url="https://github.com/Frege/frege">The Frege Team</vendor>
 
   <description><![CDATA[
@@ -9,7 +9,9 @@
     ]]></description>
 
   <change-notes><![CDATA[
-      Initial version
+      0.1.2 - Run is now much faster because Compiler is reused.
+      0.1.1 - Support for Run
+      0.1.0 - Initial version
     ]]>
   </change-notes>
 
@@ -25,18 +27,18 @@
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
 
-    <fileTypeFactory 
+    <fileTypeFactory
       implementation="org.fregelang.plugin.idea.FregeFileTypeFactory"/>
-    <lang.parserDefinition 
-      language="Frege" 
+    <lang.parserDefinition
+      language="Frege"
       implementationClass="org.fregelang.plugin.idea.FregeParserDefinition"/>
-    <lang.syntaxHighlighterFactory 
+    <lang.syntaxHighlighterFactory
       key="Frege"
       implementationClass="org.fregelang.plugin.idea.FregeSyntaxHighlighterFactory"/>
-    <colorSettingsPage 
+    <colorSettingsPage
       implementation="org.fregelang.plugin.idea.FregeColorSettingsPage"/>
-    <lang.commenter 
-      language="Frege" 
+    <lang.commenter
+      language="Frege"
       implementationClass="org.fregelang.plugin.idea.FregeCommenter"/>
     <configurationType
             implementation="org.fregelang.plugin.idea.run.FregeRunConfigurationType"/>
@@ -44,26 +46,26 @@
     <!-- future use  -->
 
 <!--    <moduleType
-      id="FREGE_MODULE" 
+      id="FREGE_MODULE"
       classpathProvider="false"
       implementationClass="org.fregelang.plugin.idea.FregeModuleType"/>
-    <completion.contributor 
+    <completion.contributor
       language="Frege"
       implementationClass="org.fregelang.plugin.idea.FregeCompletionContributor"/>
     <annotator
       language="Frege"
       implementationClass="org.fregelang.plugin.idea.FregeAnnotator"/>
-    <applicationService 
+    <applicationService
       serviceImplementation="org.fregelang.plugin.idea.config.FregeSettings"/>
-    <lang.braceMatcher 
+    <lang.braceMatcher
       language="Frege"
       implementationClass="org.fregelang.plugin.idea.FregeBraceMatcher"/>
     <externalAnnotator
       language="Frege"
       implementationClass="org.fregelang.plugin.idea.FregeExternalAnnotator"/>
-    <configurationType 
+    <configurationType
       implementation="org.fregelang.plugin.idea.FregeRunConfigurationType"/>
-    <moduleConfigurationEditorProvider 
+    <moduleConfigurationEditorProvider
       implementation="org.fregelang.plugin.idea.FregeModuleConfigEditor"/>
     <sdkType
       id="Frege"
