@@ -1,6 +1,7 @@
 plugins {
     id "org.jetbrains.intellij" version "0.0.27"
     id "de.undercouch.download" version "2.0.0"
+    id 'nebula.provided-base' version '3.0.3' // if you want provided-base
 }
 
 repositories {
@@ -10,6 +11,8 @@ repositories {
 
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'de.undercouch.download'
+apply plugin: 'nebula.provided-base'
+
 apply from: 'gradle/codegen.gradle'
 
 sourceCompatibility = 1.8
@@ -27,4 +30,8 @@ intellij {
     }
 }
 
+dependencies {
+    compile 'org.frege-lang:frege:3.23.370-g898bc8c'
+    provided files("${System.properties['java.home']}/../lib/tools.jar")
+}
 sourceSets.main.java.srcDirs = ['src/main/java', 'gen', "$buildDir/generatedSources"]
