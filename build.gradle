@@ -19,7 +19,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 intellij {
-    version '14.1.4'
+    version '15.0.1'
     pluginName 'Frege'
 
     publish {
