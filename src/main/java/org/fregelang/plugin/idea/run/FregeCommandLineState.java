@@ -14,7 +14,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.indexing.FileBasedIndex;
-import frege.prelude.PreludeBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,6 +21,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -58,12 +61,8 @@ public class FregeCommandLineState extends CommandLineState {
     /*
      * Cross compile from frege to java
      */
-    ProcessHandler fregec = compile(sourcePath, ".fr", "Could not compile with fregec", file -> {
-      String[] compilerArgs = {
-              "-d", projectOutPath, "-sp", sourcePath, "-nocp", "-greek", "-j", file
-      };
-      return frege.compiler.Main.runCompiler(compilerArgs);
-    });
+    ProcessHandler fregec = compile(sourcePath, ".fr", "Could not compile with fregec",
+            file -> fregeCompile(sourcePath, projectOutPath, file));
     if (fregec != null) return fregec;
 
     /*
@@ -84,6 +83,49 @@ public class FregeCommandLineState extends CommandLineState {
     ));
     processHandler.setShouldDestroyProcessRecursively(true);
     return processHandler;
+  }
+
+  @NotNull
+  private Boolean fregeCompile(String sourcePath, String projectOutPath, String file) {
+
+    try {
+      Method runCompiler = getRunCompiler();
+      if (runCompiler == null) {
+        return false;
+      }
+
+      String[] compilerArgs = {"-d", projectOutPath, "-sp", sourcePath, "-nocp", "-greek", "-j", file};
+      return (Boolean) runCompiler.invoke(null, new Object[]{compilerArgs});
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
+
+  String _lastJarPath;
+  Method _lastRunCompilerMethod;
+  synchronized Method getCachedRunCompiler() throws MalformedURLException, ClassNotFoundException {
+    if (_lastRunCompilerMethod != null && this.getClassPathSource().equals(_lastJarPath)) {
+      return _lastRunCompilerMethod;
+    } else {
+      _lastRunCompilerMethod = getRunCompiler();
+      _lastJarPath = this.getClassPathSource();
+      return _lastRunCompilerMethod;
+    }
+  }
+
+  @Nullable
+  private Method getRunCompiler() throws MalformedURLException, ClassNotFoundException {
+    URL[] urls = new URL[]{ new File(this.getClassPathSource()).toURI().toURL() };
+    URLClassLoader classLoader = new URLClassLoader(urls, ClassLoader.getSystemClassLoader());
+    Class<?> fregeMain = Class.forName("frege.compiler.Main", true, classLoader);
+    Method runCompiler = null;
+    for (Method method : fregeMain.getMethods()) {
+      if (method.getName().equals("runCompiler")) {
+        runCompiler = method;
+      }
+    }
+    return runCompiler;
   }
 
   @Nullable

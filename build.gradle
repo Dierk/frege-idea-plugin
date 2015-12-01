@@ -31,7 +31,6 @@ intellij {
 }
 
 dependencies {
-    compile 'org.frege-lang:frege:3.23.370-g898bc8c'
     provided files("${System.properties['java.home']}/../lib/tools.jar")
 }
 sourceSets.main.java.srcDirs = ['src/main/java', 'gen', "$buildDir/generatedSources"]
