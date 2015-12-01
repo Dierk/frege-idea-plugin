@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>org.fregelang.plugin.idea</id>
   <name>Frege Plugin</name>
-  <version>0.1.3</version>
+  <version>0.1.4</version>
   <vendor email="rahul.som@gmail.com" url="https://github.com/Frege/frege">The Frege Team</vendor>
 
   <description><![CDATA[
