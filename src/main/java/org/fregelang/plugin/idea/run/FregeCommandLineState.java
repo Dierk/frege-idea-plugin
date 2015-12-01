@@ -59,10 +59,10 @@ public class FregeCommandLineState extends CommandLineState {
      * Cross compile from frege to java
      */
     ProcessHandler fregec = compile(sourcePath, ".fr", "Could not compile with fregec", file -> {
-      PreludeBase.TList args = PreludeBase._toList(new String[]{
+      String[] compilerArgs = {
               "-d", projectOutPath, "-sp", sourcePath, "-nocp", "-greek", "-j", file
-      });
-      return frege.compiler.Main._main(args).apply(args).result().forced();
+      };
+      return frege.compiler.Main.runCompiler(compilerArgs);
     });
     if (fregec != null) return fregec;
 
