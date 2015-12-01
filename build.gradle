@@ -19,7 +19,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 intellij {
-    version 'IC-14.1.4'
+    version '14.1.4'
     pluginName 'Frege'
 
     publish {
@@ -31,7 +31,6 @@ intellij {
 }
 
 dependencies {
-    compile 'org.frege-lang:frege:3.23.370-g898bc8c'
     provided files("${System.properties['java.home']}/../lib/tools.jar")
 }
 sourceSets.main.java.srcDirs = ['src/main/java', 'gen', "$buildDir/generatedSources"]
