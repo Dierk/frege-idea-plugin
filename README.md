@@ -1,6 +1,10 @@
-First stab at an IntelliJIdea plugin for the [Frege](http://www.frege-lang.org) programming language.
+Current development on the Frege-IDEA-Plugin happens on the [intellij-frege project](https://github.com/carymrobbins/intellij-frege).
 
 Please vote for the issue to make a professional version: https://youtrack.jetbrains.com/issue/IDEABKL-6890
+
+
+### Old Content:
+_First stab at an IntelliJIdea plugin for the [Frege](http://www.frege-lang.org) programming language_.
 
 Currently it is a mere adaption of the "properties" grammar example in
 the [Custom Language Support Tutorial](http://confluence.jetbrains.com/display/IntelliJIDEA/Custom+Language+Support)
