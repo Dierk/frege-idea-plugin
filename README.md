@@ -1,6 +1,6 @@
 Current development on the Frege-IDEA-Plugin happens on the [intellij-frege project](https://github.com/carymrobbins/intellij-frege).
 
-Please vote for the issue to make a professional version: https://youtrack.jetbrains.com/issue/IDEABKL-6890
+Please vote for the issue to make a professional version: https://youtrack.jetbrains.com/issue/IDEABKL-7108
 
 
 ### Old Content:
